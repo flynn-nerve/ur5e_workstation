@@ -17,6 +17,7 @@ void Manipulation::generate_workspace() {
   // Add workstation surface
   // ************************************************************************************************ 
   // 0.192 (distance from robot center to edge of workstation)
+  // table is 0.0095 m below "0"
   collision_objects[0].id = "workstation";
   collision_objects[0].header.frame_id = "world";
 
@@ -50,7 +51,7 @@ void Manipulation::generate_workspace() {
   collision_objects[1].primitive_poses.resize(1);
   collision_objects[1].primitive_poses[0].position.x = 0.0;
   collision_objects[1].primitive_poses[0].position.y = 0.0;
-  collision_objects[1].primitive_poses[0].position.z = -0.125;
+  collision_objects[1].primitive_poses[0].position.z = -0.1345;
   // ************************************************************************************************
 
   // Add dropoff box
@@ -67,8 +68,8 @@ void Manipulation::generate_workspace() {
   collision_objects[2].primitives[0].dimensions[1] = 0.13;
   collision_objects[2].primitives[0].dimensions[2] = 0.14;
   collision_objects[2].primitive_poses.resize(1);
-  collision_objects[2].primitive_poses[0].position.x = -0.255;
-  collision_objects[2].primitive_poses[0].position.y = -0.765;
+  collision_objects[2].primitive_poses[0].position.x = -0.355;
+  collision_objects[2].primitive_poses[0].position.y = -0.665;
   collision_objects[2].primitive_poses[0].position.z = -0.0795;
   // ************************************************************************************************
 

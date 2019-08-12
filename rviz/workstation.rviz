@@ -202,7 +202,7 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: manipulator
-        Query Goal State: true
+        Query Goal State: false
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -397,7 +397,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -414,7 +414,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -440,7 +440,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.72400308
+      Distance: 3.41698956
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -455,10 +455,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.304797083
+      Pitch: 0.409797221
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.42368364
+      Yaw: 2.53868032
     Saved: ~
 Window Geometry:
   Displays:
@@ -480,5 +480,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1782
-  X: 2011
-  Y: 61
+  X: 91
+  Y: 43

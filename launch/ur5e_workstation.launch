@@ -14,7 +14,7 @@
     <!-- ** https://github.com/ros-industrial/universal_robot ** -->
     <!-- currently, joints should be limited -->
     <include file="$(find ur5e_workstation)/launch/ur5e_bringup.launch">
-      <arg name="limited" value="true"/>
+      <arg name="limited" value="false"/>
       <arg name="robot_ip" value="$(arg ip)"/> 
     </include>
     

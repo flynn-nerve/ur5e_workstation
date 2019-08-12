@@ -15,18 +15,18 @@
 void Perception::concatenate_clouds() 
 {
   PointCloud<PointXYZRGB>::Ptr temp_cloud(new PointCloud<PointXYZRGB>);
-  //PointCloud<PointXYZRGB>::Ptr segment_cloud(new PointCloud<PointXYZRGB>);
     
   *temp_cloud = this->left_cloud;
   *temp_cloud+= this->right_cloud;
   *temp_cloud+= this->top_cloud;
   *temp_cloud+= this->front_cloud;
 
+  // Save concatenated pointcloud before filtering for exercises later when desired
+  // pcl::io::savePCDFileASCII("single_workstation_object_sample.pcd", *temp_cloud);
+
   *temp_cloud = this->sac_segmentation(temp_cloud);
   *temp_cloud = this->voxelgrid_filter(temp_cloud);
 
-  //*temp_cloud-= *segment_cloud;
-
-  this->combined_cloud = this->move_least_squares(temp_cloud); 
+  this->combined_cloud = this->move_least_squares(temp_cloud);
 }
 
