@@ -11,9 +11,9 @@
 void Manipulation::pick_and_place()
 {
 
-  this->move_group_ptr->setMaxVelocityScalingFactor(0.05);
-  this->move_group_ptr->setMaxAccelerationScalingFactor(0.05);
-  this->move_group_ptr->setEndEffectorLink("tool0");
+  //this->move_group_ptr->setMaxVelocityScalingFactor(0.05);
+  //this->move_group_ptr->setMaxAccelerationScalingFactor(0.05);
+  //this->move_group_ptr->setEndEffectorLink("tool0");
   //this->move_group_ptr->setEndEffector("endeffector");
   
   std::vector<moveit_msgs::Grasp> grasps;
@@ -21,11 +21,11 @@ void Manipulation::pick_and_place()
 
   grasps[0].grasp_pose.header.frame_id = "base_link";
   tf2::Quaternion orientation;
-  orientation.setRPY(0.7, 0.7, 0);							//(-M_PI / 2, -M_PI / 4, -M_PI / 2);
+  orientation.setRPY(-3.14, 0, 1.57);							//(-M_PI / 2, -M_PI / 4, -M_PI / 2);
   grasps[0].grasp_pose.pose.orientation = tf2::toMsg(orientation);
   grasps[0].grasp_pose.pose.position.x = this->x_pos;				//-0.35;
   grasps[0].grasp_pose.pose.position.y = this->y_pos;				//0;
-  grasps[0].grasp_pose.pose.position.z = 0.3;				//0.15;
+  grasps[0].grasp_pose.pose.position.z = this->z_pos;				//0.15;
 
   grasps[0].pre_grasp_approach.direction.header.frame_id = "base_link";
   /* Direction is set as positive x axis */

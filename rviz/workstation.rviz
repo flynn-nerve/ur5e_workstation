@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /MotionPlanning1/Planning Request1
       Splitter Ratio: 0.5
     Tree Height: 314
   - Class: rviz/Selection
@@ -388,8 +389,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.0770412385
-        Min Value: -0.0213782955
+        Max Value: 0.213182941
+        Min Value: -0.022332618
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -440,25 +441,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.41698956
+      Distance: 2.32858276
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.693426073
-        Y: 0.0198668391
-        Z: 0.404846489
+        X: -0.531643093
+        Y: 0.255876452
+        Z: 0.338265061
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.409797221
+      Pitch: 0.0497971587
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.53868032
+      Yaw: 4.00368023
     Saved: ~
 Window Geometry:
   Displays:

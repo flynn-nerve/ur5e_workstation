@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e" >
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_robotiq_85" >
   <xacro:include filename="$(find ur5e_workstation)/urdf/ur5e.urdf.xacro" />
   <xacro:include filename="$(find robotiq_2f_85_full)/urdf/robotiq_2f_85_full.urdf.xacro" />
   <xacro:ur5e prefix="" joint_limited="false"/>
+  <xacro:robotiq_2f_85_full prefix=""/>
+
+    <!-- world -->
   <link name="world" />
+
+  <!-- world to robot joint -->
   <joint name="world_joint" type="fixed">
     <parent link="world" />
     <child link = "base_link" />
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
   </joint>
-  <xacro:robotiq_2f_85_full prefix=""/>
+
   <joint name="robotiq_85_adapters_joint" type="fixed">
     <parent link="tool0"/>
     <child link="realsense_camera_mount_link"/>
     <origin xyz="0.0235 -0.0535 0.0115" rpy="1.5707 0.0 -0.785" /> 
   </joint>
+
 </robot>

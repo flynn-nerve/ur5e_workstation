@@ -23,7 +23,7 @@ void Manipulation::create_object() {
 
   this->x_pos = xpos;
   this->y_pos = ypos;
-  this->z_pos = 0.025; //0.075;
+  this->z_pos = 0.04; //0.075;
   
   // Create a vector to hold collision objects.
   std::vector<moveit_msgs::CollisionObject> collision_objects;
@@ -44,7 +44,7 @@ void Manipulation::create_object() {
   collision_objects[0].primitive_poses.resize(1);
   collision_objects[0].primitive_poses[0].position.x = xpos;
   collision_objects[0].primitive_poses[0].position.y = ypos;
-  collision_objects[0].primitive_poses[0].position.z = 0.05; //0.09;
+  collision_objects[0].primitive_poses[0].position.z = 0.0175; //0.09;
   // ************************************************************************************************
 
   collision_objects[0].operation = collision_objects[0].ADD;

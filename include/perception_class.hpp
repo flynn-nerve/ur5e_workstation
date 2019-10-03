@@ -23,6 +23,7 @@
 #include <pcl/features/normal_3d.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/filters/extract_indices.h>
+#include <pcl/filters/passthrough.h>
 #include <pcl/io/obj_io.h>
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/point_cloud.h>
@@ -36,6 +37,9 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <sensor_msgs/point_cloud_conversion.h>
 #include <tf/transform_listener.h>
+
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
+#include <moveit_msgs/CollisionObject.h>
 
 typedef boost::shared_ptr<tf::TransformListener> TransformListenerPtr;
 
@@ -54,21 +58,34 @@ class Perception
     //Functions
     void wrist_camera_callback(const sensor_msgs::PointCloud2 msg);
     PointCloud<PointXYZRGB> voxelgrid_filter(PointCloud<PointXYZRGB>::Ptr cloud);
-    PointCloud<PointXYZRGB> sac_segmentation(PointCloud<PointXYZRGB>::Ptr cloud);
+    PointCloud<PointXYZRGB> sac_segmentation(PointCloud<PointXYZRGB>::Ptr cloud, PointIndices::Ptr inliers_plane);
     PointCloud<PointNormal> move_least_squares(PointCloud<PointXYZRGB>::Ptr cloud);
+    void computeNormals(PointCloud<PointXYZRGB>::Ptr cloud, PointCloud<Normal>::Ptr cloud_normals);
+    void extractNormals(PointCloud<Normal>::Ptr cloud_normals, PointIndices::Ptr inliers_plane);
+    void extractCylinder(PointCloud<PointXYZRGB>::Ptr cloud, ModelCoefficients::Ptr coefficients_cylinder, PointCloud<Normal>::Ptr cloud_normals);
+    void extractLocationHeight(PointCloud<PointXYZRGB>::Ptr cloud);
+    void addCylinder();
 
   public:
 
     //Constructor
 
     //Members
-    PointCloud<PointNormal> combined_cloud;
+    PointCloud<PointXYZRGB> combined_cloud;
     PointCloud<PointXYZRGB> current_cloud;
     PointCloud<PointXYZRGB> left_cloud;
     PointCloud<PointXYZRGB> right_cloud;
     PointCloud<PointXYZRGB> top_cloud;
     PointCloud<PointXYZRGB> front_cloud;
     TransformListenerPtr transform_listener_ptr;
+    
+    bool points_not_found;
+
+    // Extracted cylinder members
+    double radius;
+    double direction_vec[3];
+    double center_pt[3];
+    double height;
 
     //Functions
     void init_subscriber(ros::NodeHandle nodeHandle);

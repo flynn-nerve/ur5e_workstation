@@ -28,7 +28,7 @@ void Manipulation::move_to_left()
   this->joint_group_positions[1] = -2.181;
   this->joint_group_positions[2] = -0.785;
   this->joint_group_positions[3] = -2.007;
-  this->joint_group_positions[4] = -4.101;
+  this->joint_group_positions[4] = 2.179;	//-4.101;
   this->joint_group_positions[5] = 1.134;
   
   this->move_group_ptr->setJointValueTarget(this->joint_group_positions);
@@ -48,7 +48,7 @@ void Manipulation::move_to_right()
   this->joint_group_positions[1] = -2.356;
   this->joint_group_positions[2] = -0.436;
   this->joint_group_positions[3] = -2.408;
-  this->joint_group_positions[4] = -5.236;
+  this->joint_group_positions[4] = 0.963;	//-5.236;
   this->joint_group_positions[5] = -0.785;
 
   this->move_group_ptr->setJointValueTarget(this->joint_group_positions);
@@ -58,7 +58,6 @@ void Manipulation::move_to_right()
 // MOVE TO TOP FUNCTION
 //
 // Move robot into position to take "top" pointcloud snapshot
-// TODO*
 void Manipulation::move_to_top()
 {
   const robot_state::JointModelGroup* joint_model_group =
@@ -79,7 +78,6 @@ void Manipulation::move_to_top()
 // MOVE TO FRONT FUNCTION
 //
 // Move robot into position to take "front" pointcloud snapshot
-// TODO*
 void Manipulation::move_to_front()
 {
   const robot_state::JointModelGroup* joint_model_group =
@@ -101,7 +99,6 @@ void Manipulation::move_to_front()
 //
 // Move robot into neutral waiting position before taking snapshots
 // or performing manipulation task
-// TODO*
 void Manipulation::move_to_wait_position()
 {
   const robot_state::JointModelGroup* joint_model_group =

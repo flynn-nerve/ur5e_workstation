@@ -8,6 +8,7 @@
 #define MANIPULATION_CLASS_HPP
 
 #include <boost/filesystem.hpp>
+#include <math.h>
 #include <stdlib.h>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
@@ -53,9 +54,14 @@ class Manipulation
     double x_pos;
     double y_pos;
     double z_pos;
+    double th_x;
+    double th_y;
+    double th_z;
     std_msgs::Int8 instruction;
     moveit_msgs::CollisionObject collision_object;
     robotiq_2f_gripper_control::Robotiq2FGripper_robot_output command;
+    ros::ServiceClient clearOctomap;
+    std_srvs::Empty srv;
 
     //Publisher
     ros::Publisher gripper_instruction;
@@ -66,6 +72,7 @@ class Manipulation
     {
       PLANNING_GROUP = "manipulator";
       this->gripper_command = nodeHandle.advertise<robotiq_2f_gripper_control::Robotiq2FGripper_robot_output>("Robotiq2FGripperRobotOutput",10);
+      this->clearOctomap = nodeHandle.serviceClient<std_srvs::Empty>("/clear_octomap");
     }
     void init_gripper_utils(ros::NodeHandle nodeHandle);
     void move_to_left();

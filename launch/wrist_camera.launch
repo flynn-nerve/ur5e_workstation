@@ -44,8 +44,8 @@ on the rigging so that its pointcloud can be visualized
       <remap from="~input" to="wrist_camera_xy_filter/output" />
       <rosparam>
         filter_field_name: z
-        filter_limit_min: -0.25
-        filter_limit_max: 0.5
+        filter_limit_min: 0.0
+        filter_limit_max: 1.0
       </rosparam>
     </node>
   </group>

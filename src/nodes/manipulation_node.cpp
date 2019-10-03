@@ -43,9 +43,6 @@ int main(int argc, char** argv)
   // Set useful variables before robot manipulation begins
   manipulation.move_group_ptr->setPlanningTime(45.0);
   manipulation.move_group_ptr->setMaxVelocityScalingFactor(0.25);
-  //manipulation.move_group_ptr->setPlannerId("RRTConnectkConfigDefault");
-  
-  manipulation.move_group_ptr->setEndEffector("endeffector");
   manipulation.move_group_ptr->setPoseReferenceFrame("world");
   manipulation.move_group_ptr->setPlannerId("RRTConnectkConfigDefault");
   
@@ -64,11 +61,11 @@ int main(int argc, char** argv)
   // publish gripper close instruction
   manipulation.activate_gripper();
   manipulation.gripper_command.publish(manipulation.command);
-  // Wait for gripper to activate
   ros::Duration(1.5).sleep();
   
   while(ros::ok())
   {
+    // manipulation.clearOctomap.call(manipulation.srv);
     // Move into each position and halt for a moment to capture pointcloud snapshot
     //***********************************************
     manipulation.move_to_top();
@@ -88,16 +85,13 @@ int main(int argc, char** argv)
 
     manipulation.move_to_wait_position();
 
-    //manipulation.move_to_front();
-    //ros::Duration(1).sleep();
-    //perception.take_snapshot_front();
-    //ros::Duration(1).sleep();
-
     // Concatenate the pointclouds and run filters on them
     //perception.concatenate_clouds();
 
     // Publish concatenated cloud
     //perception.publish_combined_cloud();
+
+    ros::Duration(1).sleep();
 
     //***********************************************
 
@@ -115,11 +109,10 @@ int main(int argc, char** argv)
     // publish gripper close instruction
     manipulation.gripper_close();
     manipulation.gripper_command.publish(manipulation.command);
-    // Wait for gripper to close
     ros::Duration(1.5).sleep();
 
+    // attach object and reset position
     manipulation.move_group_ptr->attachObject("object", "tcp_link");
-
     manipulation.move_to_wait_position();
 
     // set pose target to dropoff, plan and move
@@ -130,7 +123,6 @@ int main(int argc, char** argv)
     // publish gripper open instruction
     manipulation.gripper_open();
     manipulation.gripper_command.publish(manipulation.command);
-    // Wait for gripper to open
     ros::Duration(1.5).sleep();
     
     manipulation.move_group_ptr->detachObject("object");    
