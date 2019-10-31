@@ -10,18 +10,13 @@
 
 void Manipulation::pick_and_place()
 {
-
-  //this->move_group_ptr->setMaxVelocityScalingFactor(0.05);
-  //this->move_group_ptr->setMaxAccelerationScalingFactor(0.05);
-  //this->move_group_ptr->setEndEffectorLink("tool0");
-  //this->move_group_ptr->setEndEffector("endeffector");
   
   std::vector<moveit_msgs::Grasp> grasps;
   grasps.resize(1);
 
   grasps[0].grasp_pose.header.frame_id = "base_link";
   tf2::Quaternion orientation;
-  orientation.setRPY(-3.14, 0, 1.57);							//(-M_PI / 2, -M_PI / 4, -M_PI / 2);
+  orientation.setRPY(-3.14, 0, 1.57);						//(-M_PI / 2, -M_PI / 4, -M_PI / 2);
   grasps[0].grasp_pose.pose.orientation = tf2::toMsg(orientation);
   grasps[0].grasp_pose.pose.position.x = this->x_pos;				//-0.35;
   grasps[0].grasp_pose.pose.position.y = this->y_pos;				//0;
@@ -38,6 +33,10 @@ void Manipulation::pick_and_place()
   grasps[0].post_grasp_retreat.direction.vector.z = 1.0;
   grasps[0].post_grasp_retreat.min_distance = 0.1;
   grasps[0].post_grasp_retreat.desired_distance = 0.25;
+
+  //============================================================================================================================
+  // GRASP POSTURE SETTINGS
+  //============================================================================================================================
 
   // pre grasp posture
   // +++++++++++++++++
@@ -64,6 +63,8 @@ void Manipulation::pick_and_place()
   //grasps[0].grasp_posture.points[0].positions[0] = 0.0;
   //grasps[0].grasp_posture.points[0].positions[1] = 0.0;
   //grasps[0].grasp_posture.points[0].time_from_start = ros::Duration(0.5);
+
+  //============================================================================================================================
 
   this->move_group_ptr->setSupportSurfaceName("workstation");
   this->move_group_ptr->pick("object", grasps);

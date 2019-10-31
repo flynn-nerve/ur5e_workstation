@@ -25,6 +25,8 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <robotiq_2f_gripper_control/Robotiq2FGripper_robot_output.h>
+#include <gpd/GraspConfigList.h>
+#include <gpd/GraspConfig.h>
 #include <std_msgs/Int8.h>
 
 typedef boost::shared_ptr<moveit::planning_interface::MoveGroupInterface> MoveGroupPtr;
@@ -62,6 +64,17 @@ class Manipulation
     robotiq_2f_gripper_control::Robotiq2FGripper_robot_output command;
     ros::ServiceClient clearOctomap;
     std_srvs::Empty srv;
+
+    // GPD Grasp members
+    gpd::GraspConfigList candidates;
+    std_msgs::Float32 score;
+    gpd::GraspConfig grasp;
+
+    // Grasp Pose members
+    geometry_msgs::Point pose_top;
+    geometry_msgs::Point pose_bottom;
+    geometry_msgs::Point pose_center;
+    geometry_msgs::Vector3 grasp_orientation;
 
     //Publisher
     ros::Publisher gripper_instruction;
@@ -103,6 +116,8 @@ class Manipulation
     {
       this->command.rPR = 255;
     }
+    void select_and_plan_path();
+    void store_gpd_vals(gpd::GraspConfigList candidates);
 };  
 
 #endif // MANIPULATION_CLASS

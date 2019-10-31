@@ -8,6 +8,50 @@
 
 #include "manipulation_class.hpp"
 
+
+// store_gpd_vals() function
+// --------------------------------
+// take in grasp candidates produced by gpd
+// save as member variables to be used internally
+void Manipulation::store_gpd_vals(gpd::GraspConfigList candidates)
+{
+  
+}
+
+// plan_paths() function;
+// --------------------------------
+// Capture grasp candidates "snapshot" and iterate through list,
+// performing the first possible grasp since gpd outputs
+// grasp candidates in a list in  a descending order 
+// according to probability of success
+void Manipulation::select_and_plan_path() 
+{
+  int count = sizeof(this->candidates);
+  this->score = candidates.grasps[0].score; 
+
+  int i = 0;
+  for(i=0; ((this->score.data > -150) && i<5); i++)
+  {
+    // Store grasp candidate "i" and separate into relevant variables for planning evaluation
+    this->grasp = this->candidates.grasps[i];
+    this->pose_top = this->grasp.top;
+    this->pose_bottom = this->grasp.bottom;
+    this->orientation = this->grasp.approach;
+    this->score = this->grasp.score;
+    ROS_INFO("this grasp score: %f", this->score.data);
+    
+    // Set target_pose
+    this->set_target_pose();  
+    this->plan_pose_goal();
+      
+    if (this->pose_success) 
+    {
+      this->move_to_pose_goal();
+      break;
+    }
+  }
+}
+
 // set_target_pose function
 // --------------------------------
 // Using stored pose and orientation variables;
@@ -21,7 +65,7 @@ void Manipulation::set_target_pose()
   this->target_pose.orientation = tf2::toMsg(this->q);
   this->target_pose.position.x = this->x_pos;
   this->target_pose.position.y = this->y_pos;
-  this->target_pose.position.z = 0.24; //this->z_pos;
+  this->target_pose.position.z = 0.05; //this->z_pos;
 }
 
 void Manipulation::set_dropoff_pose()
@@ -31,7 +75,7 @@ void Manipulation::set_dropoff_pose()
   this->target_pose.orientation = tf2::toMsg(this->q);
   this->target_pose.position.x = -0.35;
   this->target_pose.position.y = -0.65;
-  this->target_pose.position.z = 0.24;		//.0025; //this->z_pos;
+  this->target_pose.position.z = 0.054;		//.0025; //this->z_pos;
 }
 
 // plan_pose_goal function
