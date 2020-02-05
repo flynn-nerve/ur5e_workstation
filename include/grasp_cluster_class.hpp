@@ -27,16 +27,16 @@ class Grasp_Cluster
     
     // Subscriber
     ros::Subscriber clustered_grasps_gpd;
-    
-    // GPD Grasp members
-    gpd::GraspConfigList candidates;
-    std_msgs::Float32 score;
-    gpd::GraspConfig grasp;
 
     // Functions
     void clusteredGraspsGPDCallback(const gpd::GraspConfigList msg);
   
   public:
+
+    // GPD Grasp members
+    gpd::GraspConfigList candidates;
+    gpd::GraspConfig grasp;
+    std_msgs::Float32 score;
 
     // functions
     Grasp_Cluster(ros::NodeHandle nodeHandle);

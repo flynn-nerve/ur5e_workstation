@@ -8,13 +8,14 @@
 
 #include "manipulation_class.hpp"
 #include "perception_class.hpp"
+#include "grasp_cluster_class.hpp"
 
 int main(int argc, char** argv)
 {
   // ros initialization
   ros::init(argc,argv,"manipulation_sim_demo_node");
   ros::NodeHandle nh;
-  ros::AsyncSpinner spinner(2);
+  ros::AsyncSpinner spinner(4);
   spinner.start();
 
   // SETUP
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
   // Create manipulation and perception objects
   Manipulation manipulation(nh);
   Perception perception(nh);
+  Grasp_Cluster grasp(nh);
 
   // Wait for spinner to start
   ros::Duration(1.0).sleep();
@@ -44,7 +46,7 @@ int main(int argc, char** argv)
   manipulation.move_group_ptr->setPlanningTime(45.0);
   manipulation.move_group_ptr->setMaxVelocityScalingFactor(0.25);
   manipulation.move_group_ptr->setPoseReferenceFrame("world");
-  manipulation.move_group_ptr->setPlannerId("RRTConnectkConfigDefault");
+  manipulation.move_group_ptr->setPlannerId("RRTConnect");
   
   // Add object(s) to planning scene
   manipulation.generate_workspace();
@@ -86,26 +88,19 @@ int main(int argc, char** argv)
     manipulation.move_to_wait_position();
 
     // Concatenate the pointclouds and run filters on them
-    //perception.concatenate_clouds();
+    perception.concatenate_clouds();
+    perception.publish_combined_cloud();
 
-    // Publish concatenated cloud
-    //perception.publish_combined_cloud();
+    while(!grasp.planning_grasp)
+    {
+      // do nothing and wait for grasp plans
+    }
 
-    ros::Duration(1).sleep();
-
-    //***********************************************
-
-    // create a cylinder object for testing
-    manipulation.create_object();
-
-    // Wait for objects to initialize
-    ros::Duration(1.0).sleep();
-
-    // set pose target to pickup, plan and move
-    manipulation.set_target_pose();
-    manipulation.plan_pose_goal();
-    manipulation.move_to_pose_goal();
-
+    // Pass grasp candidates to manipulation object
+    manipulation.store_gpd_vals(grasp.get_grasp_candidates());
+    manipulation.select_and_plan_path();
+    grasp.set_planning(0);
+/*
     // publish gripper close instruction
     manipulation.gripper_close();
     manipulation.gripper_command.publish(manipulation.command);
@@ -125,8 +120,9 @@ int main(int argc, char** argv)
     manipulation.gripper_command.publish(manipulation.command);
     ros::Duration(1.5).sleep();
     
-    manipulation.move_group_ptr->detachObject("object");    
-
+    // detach object after letting go
+    manipulation.move_group_ptr->detachObject("object");  
+*/
   }  
 
   ros::waitForShutdown();

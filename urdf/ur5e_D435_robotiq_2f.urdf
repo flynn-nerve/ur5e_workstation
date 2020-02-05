@@ -473,7 +473,7 @@
       </geometry>
     </collision>
   </link>
-  <joint name="robotiq_2f_85_body_to_robotiq_2f_85_left_finger_joint" type="fixed">
+  <joint name="robotiq_2f_85_body_to_robotiq_2f_85_left_finger_joint" type="passive">
     <origin rpy="0 0 -3.14159265358979" xyz="0.0614081599849013 0.0421978920004752 0"/>
     <parent link="robotiq_2f_85_body_link"/>
     <child link="robotiq_2f_85_left_finger_link"/>
@@ -501,7 +501,7 @@
       </geometry>
     </collision>
   </link>
-  <joint name="robotiq_2f_85_body_to_robotiq_2f_85_right_finger_joint" type="fixed">
+  <joint name="robotiq_2f_85_body_to_robotiq_2f_85_right_finger_joint" type="passive">
     <origin rpy="0 0 -3.14159265358979" xyz="0.0614081599849013 0.0421978920004752 0"/>
     <parent link="robotiq_2f_85_body_link"/>
     <child link="robotiq_2f_85_right_finger_link"/>

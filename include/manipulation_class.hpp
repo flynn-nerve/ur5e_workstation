@@ -67,13 +67,14 @@ class Manipulation
 
     // GPD Grasp members
     gpd::GraspConfigList candidates;
-    std_msgs::Float32 score;
     gpd::GraspConfig grasp;
+    std_msgs::Float32 score;
 
     // Grasp Pose members
     geometry_msgs::Point pose_top;
     geometry_msgs::Point pose_bottom;
     geometry_msgs::Point pose_center;
+    geometry_msgs::Point pose_sample;
     geometry_msgs::Vector3 grasp_orientation;
 
     //Publisher

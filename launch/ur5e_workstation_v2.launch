@@ -32,8 +32,4 @@
   </include>
 
 
-  <!-- Run node to place collision objects (the table + pedestal) from ur5e_workstation package (robot name is 'manipulator' as defined in custom Moveit! package: ur5e_joint_limited_robotiq_2f_85_moveit_config) -->
-  <!-- <node name="build_workstation" pkg="ur5e_workstation" type="build_workstation"/> -->
-
-
 </launch>

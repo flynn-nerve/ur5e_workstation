@@ -16,7 +16,7 @@
 Grasp_Cluster::Grasp_Cluster(ros::NodeHandle nodeHandle) 
 {
   this->planning_grasp = 0;
-  this->clustered_grasps_gpd = nodeHandle.subscribe("detect_grasps/clustered_grasps", 1, &Grasp_Cluster::clusteredGraspsGPDCallback, this);
+  this->clustered_grasps_gpd = nodeHandle.subscribe("/detect_grasps/clustered_grasps", 1, &Grasp_Cluster::clusteredGraspsGPDCallback, this);
 }
 
 // get_grasp_candidates() function
@@ -24,6 +24,8 @@ Grasp_Cluster::Grasp_Cluster(ros::NodeHandle nodeHandle)
 // Return current grasp candidates for processing in manipulation function
 gpd::GraspConfigList Grasp_Cluster::get_grasp_candidates()
 {
+  ROS_INFO("getting candidates");
+  ROS_INFO("new cluster grabbed, highest score: %f", this->score.data);
   return this->candidates;
 }
 
@@ -48,19 +50,25 @@ void Grasp_Cluster::set_planning(bool val)
 // otherwise do nothing
 void Grasp_Cluster::clusteredGraspsGPDCallback(gpd::GraspConfigList msg)
 {
-  if (this->planning_grasp == 0)
+  if (msg.grasps.size() > 0)
   {
-    this->candidates = msg;
-    this->score = candidates.grasps[0].score;
-    if (this->score.data > -150)
+    if (this->planning_grasp == 0)
     {
-      ROS_INFO("new cluster grabbed, highest score: %f", this->score.data);
-      this->planning_grasp = 1;
+      this->candidates = msg;
+      this->score = candidates.grasps[0].score;
+      if (this->score.data > -150)
+      {
+        ROS_INFO("new cluster grabbed, highest score: %f", this->score.data);
+        this->planning_grasp = 1;
+      }
+      else
+      {
+        ROS_INFO("trying new cluster, highest score was: %f", this->score.data);
+      }
     }
-    else
-    {
-      ROS_INFO("trying new cluster, highest score was: %f", this->score.data);
-    }
-    
+  }
+  if (msg.grasps.size() == 0)
+  {
+    ROS_INFO("zero grasps, retry");
   }
 }
