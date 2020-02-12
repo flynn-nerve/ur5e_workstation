@@ -204,7 +204,7 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: manipulator
-        Query Goal State: false
+        Query Goal State: true
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -446,7 +446,7 @@ Visualization Manager:
       Pitch: 0.684796512
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.66688967
+      Yaw: 2.66188955
     Saved: ~
 Window Geometry:
   Displays:

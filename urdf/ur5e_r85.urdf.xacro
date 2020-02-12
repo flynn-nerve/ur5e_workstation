@@ -29,14 +29,14 @@
   <joint name="fake_joint" type="fixed">
     <parent link="tool0" />
     <child link = "wrist_adapter_link" />
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0" />
   </joint>
 
   <xacro:robotiq_arg2f_85 prefix="gripper_"/>
   <joint name="robotiq_2f_85_connector_joint" type="fixed">
     <parent link="wrist_adapter_link"/>
     <child link="gripper_robotiq_arg2f_base_link"/>
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" /> 
+    <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0" /> 
   </joint>
 
 </robot>
