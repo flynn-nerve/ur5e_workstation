@@ -117,8 +117,13 @@ class Manipulation
     {
       this->command.rPR = 255;
     }
+    void gripper_set(int p=0){
+      p = std::max(0,p);
+      p = std::min(255,p);
+      this->command.rPR = p;
+    }
     void select_and_plan_path();
     void store_gpd_vals(gpd::GraspConfigList candidates);
-};  
+};
 
 #endif // MANIPULATION_CLASS

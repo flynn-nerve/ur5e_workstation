@@ -8,9 +8,9 @@
 
   <!-- Launch realsense camera mounted to wrist, filters exist and can be adjusted to get your favorite box dimensions depending on task requirements, feel free to add more filters or take some away within the referenced launch file -->
 
-  <!-- commented out by peter, get pranked
-  <include file="$(find ur5e_workstation)/launch/wrist_camera.launch"/>
-  -->
+
+  <!-- <include file="$(find ur5e_workstation)/launch/wrist_camera.launch"/> -->
+
 
   <group unless="$(arg sim)" >
     <!-- Launch UR5e hardware bringup nodes and configuration parameters (**need universal_robot package for these files!!**) -->
@@ -35,7 +35,7 @@
   <include file="$(find ur5e_joint_limited_robotiq_2f_85_moveit_config)/launch/moveit_rviz.launch">
     <arg name="config" value="true"/>
   </include>
-  
+
 
   <!-- Run node to place collision objects (the table + pedestal) from ur5e_workstation package (robot name is 'manipulator' as defined in custom Moveit! package: ur5e_joint_limited_robotiq_2f_85_moveit_config) -->
   <!-- <node name="build_workstation" pkg="ur5e_workstation" type="build_workstation"/> -->

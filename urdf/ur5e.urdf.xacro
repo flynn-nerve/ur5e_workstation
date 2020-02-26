@@ -378,5 +378,13 @@
       <child link="${prefix}tool0"/>
     </joint>
 
+    <!-- Artificial end link (TCP) -->
+    <link name="${prefix}virtual_tcp_link"/>
+    <joint name="${prefix}tool0-virtual_tcp_link_joint" type="fixed">
+      <origin xyz="0 0 0.21" rpy="0 0 0"/>
+      <parent link="${prefix}tool0"/>
+      <child link="${prefix}virtual_tcp_link"/>
+    </joint>
+
   </xacro:macro>
 </robot>

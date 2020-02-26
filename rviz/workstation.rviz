@@ -28,7 +28,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: constrained_view
+    SyncSource: ""
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -162,6 +162,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          virtual_tcp_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -303,6 +307,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          virtual_tcp_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -468,5 +476,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1782
-  X: 91
+  X: 92
   Y: 43
