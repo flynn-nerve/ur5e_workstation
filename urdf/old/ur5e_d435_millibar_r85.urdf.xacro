@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_r85" >
+  <xacro:include filename="$(find ur5e_workstation)/urdf/ur5e.urdf.xacro" />
+  <xacro:include filename="$(find d435_millibar_r85_mount_structure)/urdf/d435_millibar_r85_mount_structure.urdf.xacro" />
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+
+  <xacro:ur5e prefix="" joint_limited="false"/>
+  <link name="world" />
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <xacro:d435_millibar_r85_mount_structure prefix=""/>
+  <joint name="adapters_joint" type="fixed">
+    <parent link="tool0"/>
+    <child link="d435_mount_link"/>
+    <origin xyz="0.0 0.0 -0.0056" rpy="-1.57 0.0 3.14" /> 
+  </joint>
+
+  <xacro:robotiq_arg2f_85 prefix="gripper_"/>
+  <joint name="robotiq_2f_85_connector_joint" type="fixed">
+    <parent link="r85_network_adapter_link"/>
+    <child link="gripper_robotiq_arg2f_base_link"/>
+    <origin xyz="0.0 0.0 0.005" rpy="0.0 0.0 -1.57" /> 
+  </joint>
+
+</robot>

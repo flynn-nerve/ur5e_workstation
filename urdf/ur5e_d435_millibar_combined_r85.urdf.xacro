@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_r85" >
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_combined_r2f85" >
   <xacro:include filename="$(find ur5e_workstation)/urdf/ur5e_with_r85_mounting_structure.urdf.xacro" />
   <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
 
