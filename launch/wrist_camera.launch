@@ -52,35 +52,35 @@ on the rigging so that its pointcloud can be visualized
 
   <!-- This transforms each resulting pointcloud into a global reference frame -->
   <node name="wrist_camera_tf0" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_color_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_color_optical_frame 100" />
   <node name="wrist_camera_tf1" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_depth_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_depth_frame 100" />
   <node name="wrist_camera_tf2" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_link 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_link 100" />
   <node name="wrist_camera_tf3" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_depth_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_depth_optical_frame 100" />
   <node name="wrist_camera_tf4" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_color_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_color_frame 100" />
   <node name="wrist_camera_tf5" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_aligned_depth_to_color_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_aligned_depth_to_color_frame 100" />
   <node name="wrist_camera_tf6" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_infra1_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_infra1_frame 100" />
   <node name="wrist_camera_tf7" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_infra1_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_infra1_optical_frame 100" />
   <node name="wrist_camera_tf8" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_aligned_depth_to_infra1_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_aligned_depth_to_infra1_frame 100" />
   <node name="wrist_camera_tf9" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_infra2_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_infra2_frame 100" />
   <node name="wrist_camera_tf10" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_infra2_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_infra2_optical_frame 100" />
   <node name="wrist_camera_tf11" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_gyro_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_gyro_frame 100" />
   <node name="wrist_camera_tf12" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_gyro_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_gyro_optical_frame 100" />
   <node name="wrist_camera_tf13" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_accel_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_accel_frame 100" />
   <node name="wrist_camera_tf14" pkg="tf" type="static_transform_publisher"
-    args="-0.0325 0.025 0.0 0.0075 0 -1.5707 /realsense_camera_link /wrist_camera_accel_optical_frame 100" />
+    args="-0.0325 0.025 0.0 0.0 3.14 3.14 /robot_d435 /wrist_camera_accel_optical_frame 100" />
 
 </launch>
 

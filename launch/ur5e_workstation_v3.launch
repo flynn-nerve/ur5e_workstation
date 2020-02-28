@@ -16,18 +16,19 @@
     <include file="$(find ur5e_workstation)/launch/ur5e_bringup.launch">
       <arg name="limited" value="false"/>
       <arg name="robot_ip" value="$(arg ip)"/> 
+      <arg name="prefix" value="robot_" />
     </include>
     
     <!-- Launch UR5e hardware planning execution and configuration parameters -->
     <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/ur5e_moveit_planning_execution.launch"/>
   </group>
 
-  <include file="$(find ur5e_D435_robotiq_2f_moveit_config)/launch/demo.launch" if="$(arg sim)" />
+  <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/demo.launch" if="$(arg sim)" />
 
 
   <!-- Launch Moveit! and Rviz files (rviz config file <your_configuration>.rviz can be chosen here) -->
   <!-- Uses custom Moveit! package kinematics.yaml file for function -->
-  <include file="$(find ur5e_joint_limited_robotiq_2f_85_moveit_config)/launch/moveit_rviz.launch">
+  <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/moveit_rviz.launch">
     <arg name="config" value="true"/>
   </include>
 
