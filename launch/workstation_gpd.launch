@@ -17,7 +17,8 @@
         
     <!-- What type of point cloud is used and what ROS topic it comes from -->
     <param name="cloud_type" value="0" /> <!-- 0: PointCloud2, 1: CloudSized, 2: CloudIndexed, 3: CloudSamples -->
-    <param name="cloud_topic" value="/combined_cloud" />
+    <param name="cloud_topic" value="/combined_cloud" unless="$(arg sim)" />
+    <param name="cloud_topic" value="/cloud_pcd" if="$(arg sim)" />
     
      <!-- (optional) The ROS topic that the samples come from (default: an empty string) -->
     <param name="samples_topic" value="" />

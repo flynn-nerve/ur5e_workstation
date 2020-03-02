@@ -44,6 +44,8 @@ I want to install this package and its other required packages in my workspace c
 6. cd src/ur5e_workstation/scripts
 7. ./install\_workspace catkin\_ws
 
+_You will need to enter your password for the sudo apt-get... instructions in the beginning, so don't walk away until you have completed that step (probably about 15 seconds after running the script). Installation will take a while after entering your password, so don't forget to do that (~20 minutes if you have none of the libraries installed or haven't set up a realsense camera already)_
+
 ## Use of package
 
 Currently, the package is used to run a specific setup; the UR5e industrial arm with a mounting structure that includes a 3d-printed realsense camera mount, gripper quick-change adapter, and a robotiq 2f\_85 gripper. The moveit config package can be used in simulation, but you will want to make your own custom moveit config package if you have a robot with a different hardware setup.

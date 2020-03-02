@@ -36,7 +36,7 @@ sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/
 sudo apt-get install librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg -y
 
 ## update and upgrade
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update && sudo apt-get upgrade -y
 
 ## check for and install missing dependencies and build workspace
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
@@ -59,7 +59,7 @@ git clone -b kinetic-devel https://github.com/pal-robotics/ddynamic_reconfigure.
 cd ..
 
 ## install rgbd_launch/rs_camera package for realsense cameras
-sudo apt-get install ros-kinetic-rgbd-launch
+sudo apt-get install ros-kinetic-rgbd-launch -y
 
 ## return to base directory
 cd ..
@@ -71,12 +71,12 @@ source ./devel/setup.bash
 
 ## install moveit! packages
 ##--------------------------------------------------------------##
-rosdep update
-sudo apt-get update
-sudo apt-get dist-upgrade
+rosdep update -y
+sudo apt-get update -y
+sudo apt-get dist-upgrade -y
 
 ## install moveit!
-sudo apt install ros-kinetic-moveit
+sudo apt install ros-kinetic-moveit -y
 
 ## cd to src folder and clone tutorial and panda_moveit_config package for testing/practice/reference
 cd src

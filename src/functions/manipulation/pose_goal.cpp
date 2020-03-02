@@ -82,12 +82,12 @@ void Manipulation::set_target_pose()
 
 void Manipulation::set_dropoff_pose()
 {
-  this->q.setRPY(-1.57, 1.57, 0);
+  this->q.setRPY(0, 3.14, 1.57);
   this->q.normalize();
   this->target_pose.orientation = tf2::toMsg(this->q);
   this->target_pose.position.x = -0.35;
-  this->target_pose.position.y = -0.665;
-  this->target_pose.position.z = 0.15;
+  this->target_pose.position.y = -0.665; //0.665
+  this->target_pose.position.z = 0.09;
 }
 
 // plan_pose_goal function
