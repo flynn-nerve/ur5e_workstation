@@ -6,6 +6,21 @@ WORKSPACE=$1
 echo package clone path: $WORKSPACE/src
 cd ~/$WORKSPACE/src
 
+### install catkin_tools
+###--------------------------------------------------------------##
+#sudo apt-get install ros-kinetic-catkin python-catkin-tools
+
+### return to base directory
+#cd ..
+
+### init and build catkin workspace
+#catkin init
+#catkin build
+#source ./devel/setup.bash
+
+## install required UR and robotiq packages cameras
+##--------------------------------------------------------------##
+
 ## clone required git repos
 git clone -b kinetic-devel https://github.com/ros-industrial/universal_robot.git
 git clone -b kinetic-devel https://github.com/dniewinski/ur_modern_driver.git
@@ -39,6 +54,7 @@ sudo apt-get update && sudo apt-get upgrade
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
 cd ..
 catkin build
+source ./devel/setup.bash
 
 ## run realsense camera scripts to add cameras to udev rules and patch software
 ## your cameras WILL NOT WORK without allowing this step to happen
@@ -52,11 +68,37 @@ cd ..
 git clone -b development https://github.com/doronhi/realsense.git
 cd realsense
 git clone -b kinetic-devel https://github.com/pal-robotics/ddynamic_reconfigure.git
-cd ../..
+cd ..
 
 ## install rgbd_launch package for realsense cameras
 sudo apt-get isntall ros-kinetic-rgbd-launch
 
+## return to base directory
+cd ..
+
 ## check for and install missing dependencies again, build
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
 catkin build
+source ./devel/setup.bash
+
+## install moveit! packages
+##--------------------------------------------------------------##
+rosdep update
+sudo apt-get update
+sudo apt-get dist-upgrade
+
+## install moveit!
+sudo apt install ros-kinetic-moveit
+
+## cd to src folder and clone tutorial and panda_moveit_config package for testing/practice/reference
+cd src
+git clone -b kinetic-devel https://github.com/ros-planning/moveit_tutorials.git
+git clone -b kinetic-devel https://github.com/ros-planning/panda_moveit_config.git
+
+## return to base directory
+cd ..
+
+## install dependencies, build and source workspace
+rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
+catkin build
+source ./devel/setup.bash
