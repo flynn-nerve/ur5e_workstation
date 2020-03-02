@@ -1,6 +1,6 @@
 # NERVE Center @ UMASS Lowell: UR5e Workstation Package
 
-This package is currently a work in progress and a new, more general, package will be created for the industrial arm robots at the NERVE center once all basic requirements are complete for the UR5e robot.
+This package is currently a work in progress and a new, more general package will be created for the industrial arm robots at the NERVE center once all basic requirements are complete for the UR5e robot.
 
 This package serves to hold all of the launch, urdf, dae, etc. files necessary for the operation of the UR5e system at the NERVE Center with the 2 finger robotiq gripper and realsense d435 camera mouted to the end of the arm. Some old files remain as a point of reference as development moves forward. Files from the urdf folder were used to generate a moveit config package for the robot as well as an IKFast solver for operation of the actual robot.
 

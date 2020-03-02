@@ -90,3 +90,24 @@ cd ..
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
 catkin build
 source ./devel/setup.bash
+
+## install gpd packages
+##--------------------------------------------------------------##
+
+## install gpg (grasp pose generator) in base workspace directory (it is supposed to be here)
+cd ~/$WORKSPACE
+git clone https://github.com/atenpas/gpg.git
+cd gpg
+mkdir build && cd build
+cmake ..
+make
+sudo make install
+
+## move back into src folder and clone GPD package (MUST BE forward branch)
+cd ~/$WORKSPACE/src
+git clone -b forward https://github.com/atenpas/gpd.git
+
+## return to base directory and build, source
+cd ..
+catkin build
+source ./devel/setup.bash
