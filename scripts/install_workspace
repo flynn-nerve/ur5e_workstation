@@ -6,18 +6,6 @@ WORKSPACE=$1
 echo package clone path: $WORKSPACE/src
 cd ~/$WORKSPACE/src
 
-### install catkin_tools
-###--------------------------------------------------------------##
-#sudo apt-get install ros-kinetic-catkin python-catkin-tools
-
-### return to base directory
-#cd ..
-
-### init and build catkin workspace
-#catkin init
-#catkin build
-#source ./devel/setup.bash
-
 ## install required UR and robotiq packages cameras
 ##--------------------------------------------------------------##
 
