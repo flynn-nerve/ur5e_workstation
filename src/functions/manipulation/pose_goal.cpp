@@ -56,9 +56,9 @@ void Manipulation::select_and_plan_path()
     if (this->pose_success) 
     {
       // create a cylinder object for testing
-      this->create_object();
-      this->pick_and_place();
-      //this->move_to_pose_goal();
+      //this->create_object();
+      //this->pick_and_place();
+      this->move_to_pose_goal();
       ROS_INFO("plan success");
       break;
     }
@@ -82,12 +82,12 @@ void Manipulation::set_target_pose()
 
 void Manipulation::set_dropoff_pose()
 {
-  this->q.setRPY(-3.14, 0, 1.57);
+  this->q.setRPY(-1.57, 1.57, 0);
   this->q.normalize();
   this->target_pose.orientation = tf2::toMsg(this->q);
   this->target_pose.position.x = -0.35;
   this->target_pose.position.y = -0.665;
-  this->target_pose.position.z = 0.09;
+  this->target_pose.position.z = 0.15;
 }
 
 // plan_pose_goal function

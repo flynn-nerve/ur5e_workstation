@@ -8,6 +8,7 @@
   <!-- Launch realsense camera mounted to wrist, filters exist and can be adjusted to get your favorite box dimensions depending on task requirements, feel free to add more filters or take some away within the referenced launch file -->
   <include file="$(find ur5e_workstation)/launch/wrist_camera.launch"/>
 
+  <!-- Only launch these nodes/launch files if not running in simulation -->
   <group unless="$(arg sim)" >
     <!-- Launch UR5e hardware bringup nodes and configuration parameters (**need universal_robot package for these files!!**) -->
     <!-- ** https://github.com/ros-industrial/universal_robot ** -->
@@ -20,16 +21,16 @@
     
     <!-- Launch UR5e hardware planning execution and configuration parameters -->
     <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/ur5e_moveit_planning_execution.launch"/>
+
+    <!-- Launch Moveit! and Rviz files (rviz config file <your_configuration>.rviz can be chosen here) -->
+    <!-- Uses custom Moveit! package kinematics.yaml file for function -->
+    <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/moveit_rviz.launch">
+      <arg name="config" value="true"/>
+    </include>
+
   </group>
 
   <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/demo.launch" if="$(arg sim)" />
-
-
-  <!-- Launch Moveit! and Rviz files (rviz config file <your_configuration>.rviz can be chosen here) -->
-  <!-- Uses custom Moveit! package kinematics.yaml file for function -->
-  <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/moveit_rviz.launch">
-    <arg name="config" value="true"/>
-  </include>
 
   <!-- Launch Robotiq 2f Gripper TCP node for gripper control -->
   <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperTcpNode" type="Robotiq2FGripperTcpNode.py" args="10.10.10.42" />

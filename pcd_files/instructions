@@ -1,0 +1,9 @@
+In order to capture pcd files:
+
+Navigate to your directory of choice and run the command:
+rosrun pcl_ros pointcloud_to_pcd input:=/<your_pointcloud_topic>
+
+To publish a pointcloud:
+
+Navigate to the directory containing your pcd files and run the command:
+rosrun pcl_ros pcd_to_pointcloud <your_pcd_file>.pcd <period> _frame_is:=/<target_frame>

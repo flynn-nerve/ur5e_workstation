@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     manipulation.store_gpd_vals(grasp.get_grasp_candidates());
     manipulation.select_and_plan_path();
     grasp.set_planning(0);
-/*
+
     // publish gripper close instruction
     manipulation.gripper_close();
     manipulation.gripper_command.publish(manipulation.command);
@@ -122,7 +122,7 @@ int main(int argc, char** argv)
     
     // detach object after letting go
     manipulation.move_group_ptr->detachObject("object");  
-*/
+
   }  
 
   ros::waitForShutdown();
