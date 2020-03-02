@@ -58,7 +58,8 @@ cd realsense
 git clone -b kinetic-devel https://github.com/pal-robotics/ddynamic_reconfigure.git
 cd ..
 
-## install rgbd_launch package for realsense cameras
+## install rgbd_launch & rs_launch package for realsense cameras
+sudo apt-get install ros-kinetic-rgbd-launch
 sudo apt-get install ros-kinetic-rgbd-launch
 
 ## return to base directory
