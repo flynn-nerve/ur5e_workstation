@@ -1,6 +1,5 @@
 <launch>
 
-
   <!-- use argument ip:=<your.robot.ip.address> when lauching this file -->
   <!-- on robot pendant, press top right menu button (three horizontal lines), click "About" and IP address will be displayed -->
   <arg name="sim" default="false" />
@@ -32,5 +31,7 @@
     <arg name="config" value="true"/>
   </include>
 
+  <!-- Launch Robotiq 2f Gripper TCP node for gripper control -->
+  <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperTcpNode" type="Robotiq2FGripperTcpNode.py" args="10.10.10.42" />
 
 </launch>
