@@ -107,7 +107,7 @@ int main(int argc, char** argv)
     ros::Duration(1.5).sleep();
 
     // attach object and reset position
-    manipulation.move_group_ptr->attachObject("object", "tcp_link");
+    manipulation.move_group_ptr->attachObject("object", "robot_tcp_link");
     manipulation.move_to_wait_position();
 
     // set pose target to dropoff, plan and move

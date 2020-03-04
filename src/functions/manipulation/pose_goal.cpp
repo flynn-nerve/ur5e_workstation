@@ -57,8 +57,8 @@ void Manipulation::select_and_plan_path()
     {
       // create a cylinder object for testing
       //this->create_object();
-      //this->pick_and_place();
-      this->move_to_pose_goal();
+      this->pick_and_place();
+      //this->move_to_pose_goal();
       ROS_INFO("plan success");
       break;
     }
@@ -86,7 +86,7 @@ void Manipulation::set_dropoff_pose()
   this->q.normalize();
   this->target_pose.orientation = tf2::toMsg(this->q);
   this->target_pose.position.x = -0.35;
-  this->target_pose.position.y = -0.665; //0.665
+  this->target_pose.position.y = -0.665;
   this->target_pose.position.z = 0.09;
 }
 
@@ -108,8 +108,6 @@ void Manipulation::plan_pose_goal()
 // Using stored variables; move to current jointValueTarget
 void Manipulation::move_to_pose_goal()
 {
-  //const robot_state::JointModelGroup* joint_model_group =
-    //this->move_group_ptr->getCurrentState()->getJointModelGroup(this->PLANNING_GROUP);
   this->move_group_ptr->setGoalPositionTolerance(0.001);
   this->move_group_ptr->setGoalOrientationTolerance(0.002);
   this->move_group_ptr->move();
