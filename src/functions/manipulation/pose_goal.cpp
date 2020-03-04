@@ -35,15 +35,13 @@ void Manipulation::select_and_plan_path()
   this->score = candidates.grasps[0].score; 
 
   int i = 0;
+  this->grabbed_something = 0;
   for(i=0; ((this->score.data > -150) && i<10); i++)
   {
     // Store grasp candidate "i" and separate into relevant variables for planning evaluation
     this->grasp = this->candidates.grasps[i];
     this->pose_top = this->grasp.top;
     this->pose_bottom = this->grasp.bottom;
-    this->pose_center.x = this->pose_top.x - this->pose_bottom.x;
-    this->pose_center.y = this->pose_top.y - this->pose_bottom.y;
-    this->pose_center.z = this->pose_top.z - this->pose_bottom.z;
     this->pose_sample = this->grasp.sample;
     this->orientation = this->grasp.approach;
     this->score = this->grasp.score;
@@ -55,10 +53,9 @@ void Manipulation::select_and_plan_path()
       
     if (this->pose_success) 
     {
-      // create a cylinder object for testing
+      this->grabbed_something = 1;
       //this->create_object();
-      this->pick_and_place();
-      //this->move_to_pose_goal();
+      //this->pick_and_place();
       ROS_INFO("plan success");
       break;
     }

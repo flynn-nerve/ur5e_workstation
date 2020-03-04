@@ -101,27 +101,33 @@ int main(int argc, char** argv)
     manipulation.select_and_plan_path();
     grasp.set_planning(0);
 
-    // publish gripper close instruction
-    manipulation.gripper_close();
-    manipulation.gripper_command.publish(manipulation.command);
-    ros::Duration(1.5).sleep();
+    if(manipulation.grabbed_something)
+    {
 
-    // attach object and reset position
-    manipulation.move_group_ptr->attachObject("object", "robot_tcp_link");
-    manipulation.move_to_wait_position();
+      manipulation.pick_and_place();
 
-    // set pose target to dropoff, plan and move
-    manipulation.set_dropoff_pose();
-    manipulation.plan_pose_goal();
-    manipulation.move_to_pose_goal();
+      // publish gripper close instruction
+      manipulation.gripper_close();
+      manipulation.gripper_command.publish(manipulation.command);
+      ros::Duration(1.5).sleep();
 
-    // publish gripper open instruction
-    manipulation.gripper_open();
-    manipulation.gripper_command.publish(manipulation.command);
-    ros::Duration(1.5).sleep();
+      // attach object and reset position
+      manipulation.move_group_ptr->attachObject("object", "robot_tcp_link");
+      manipulation.move_to_wait_position();
+
+      // set pose target to dropoff, plan and move
+      manipulation.set_dropoff_pose();
+      manipulation.plan_pose_goal();
+      manipulation.move_to_pose_goal();
+
+      // publish gripper open instruction
+      manipulation.gripper_open();
+      manipulation.gripper_command.publish(manipulation.command);
+      ros::Duration(1.5).sleep();
     
-    // detach object after letting go
-    manipulation.move_group_ptr->detachObject("object");  
+      // detach object after letting go
+      manipulation.move_group_ptr->detachObject("object");  
+    }
 
   }  
 
