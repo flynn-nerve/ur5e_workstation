@@ -10,9 +10,10 @@ The setup scripts and instructions contained within this README/package all expe
 
 Catkin\_tools (the package that gives you the catkin build utility among other tools) gives the user more context info when building and setting up a workspace and it the newer of the build options. It is suggested that the user switch to using the catkin\_tools package if they are not already.
 
-###### You can set up catkin_tools by heading over to their site or following these instructions:
+## You can set up catkin_tools by heading over to their site or following these instructions:
 
 *https://catkin-tools.readthedocs.io/en/latest/installing.html*
+
 *generally you would have this installed first, but in case you don't I am leaving directions* 
 
 1. sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -20,7 +21,7 @@ Catkin\_tools (the package that gives you the catkin build utility among other t
 3. sudo apt-get update
 4. sudo apt-get install python-catkin-tools
 
-###### Get your workspace ready:
+###### Get your workspace initialized and ready:
 
 1. cd ~/<your_ws>
 2. catkin init
