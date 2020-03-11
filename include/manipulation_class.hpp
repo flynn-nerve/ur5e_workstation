@@ -59,6 +59,7 @@ class Manipulation
     double th_x;
     double th_y;
     double th_z;
+    bool grabbed_something;
     std_msgs::Int8 instruction;
     moveit_msgs::CollisionObject collision_object;
     robotiq_2f_gripper_control::Robotiq2FGripper_robot_output command;
