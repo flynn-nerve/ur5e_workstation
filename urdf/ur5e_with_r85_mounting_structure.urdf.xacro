@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find ur_e_description)/urdf/ur.transmission.xacro" />
-  <xacro:include filename="$(find ur_e_description)/urdf/ur.gazebo.xacro" />
-
   <xacro:macro name="cylinder_inertial" params="radius length mass *origin">
     <inertial>
       <mass value="${mass}" />
@@ -24,6 +21,9 @@
     transmission_hw_interface:=hardware_interface/PositionJointInterface
     safety_limits:=false safety_pos_margin:=0.15
     safety_k_position:=20">
+
+    <xacro:include filename="$(find ur_e_description)/urdf/ur.transmission.xacro" />
+    <xacro:include filename="$(find ur_e_description)/urdf/ur.gazebo.xacro" />
 
     <!-- Inertia parameters -->
     <xacro:property name="base_mass" value="4.0" />  <!-- This mass might be incorrect -->

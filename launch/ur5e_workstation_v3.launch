@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 
   <!-- use argument ip:=<your.robot.ip.address> when lauching this file -->

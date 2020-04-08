@@ -13,6 +13,7 @@ cd ~/$WORKSPACE/src
 git clone -b kinetic-devel https://github.com/ros-industrial/universal_robot.git
 git clone -b kinetic-devel https://github.com/dniewinski/ur_modern_driver.git
 git clone -b kinetic-devel https://github.com/ros-industrial/robotiq.git
+git clone -b master https://github.com/Kinovarobotics/kinova-ros.git
 
 ## clone custom NERVE UR5e related packages (mount URDF, moveit config and ikfast solver)
 git clone -b master https://github.com/flynn-nerve/ur5e_d435_millibar_combined_r2f85_moveit_config.git
