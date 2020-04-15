@@ -13,22 +13,30 @@
     xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
     xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_combined_r2f85" >
 
-  <xacro:include filename="$(find ur5e_workstation)/urdf/ur5e_with_r85_mounting_structure.urdf.xacro" />
-  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+  <xacro:macro name="ur_arm_gazebo" params="prefix">
 
-  <xacro:ur5e prefix="robot_" joint_limited="false"/>
-  <link name="world" />
-  <joint name="world_joint" type="fixed">
-    <parent link="world" />
-    <child link = "robot_base_link" />
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-  </joint>
+    <gazebo reference="${prefix}shoulder_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}upper_arm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}forearm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_1_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_3_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_2_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}ee_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
 
-  <xacro:robotiq_arg2f_85 prefix="gripper_"/>
-  <joint name="robotiq_2f_85_connector_joint" type="fixed">
-    <parent link="robot_r85_network_adapter_link"/>
-    <child link="gripper_robotiq_arg2f_base_link"/>
-    <origin xyz="0.0 0.0 0.005" rpy="0.0 0.0 -1.57" /> 
-  </joint>
+  </xacro:macro>
 
 </robot>

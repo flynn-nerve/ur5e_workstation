@@ -30,11 +30,6 @@
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find ur5e_workstation)/urdf/ur5e_d435_millibar_combined_r2f85.urdf.xacro'"/>
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="$(arg use_gui)"/>
-    <rosparam param="source_list">[/ur5e/joint_states]</rosparam>  <!-- [move_group/fake_controller_joint_states] -->
-  </node>
-
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -model ur5e -param robot_description"/>
@@ -42,6 +37,6 @@
   <!-- launch files -->
   <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/ros_controllers.launch"/>
 
-  <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/gazebo_planning_execution.launch"/>
+  <!-- <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/gazebo_planning_execution.launch"/> -->
 
 </launch>
