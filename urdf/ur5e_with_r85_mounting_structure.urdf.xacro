@@ -36,9 +36,11 @@
 
     <xacro:include filename="$(find ur5e_workstation)/urdf/ur_e_transmission.xacro" />
     <xacro:include filename="$(find ur5e_workstation)/urdf/ur_e_gazebo.xacro" />
+    <xacro:include filename="$(find ur5e_workstation)/urdf/depth_camera_gazebo.xacro" />
 
-    <xacro:ur_arm_transmission prefix="${prefix}" />
+    <xacro:ur_arm_transmission prefix="${prefix}" namespace="ur5e" />
     <xacro:ur_arm_gazebo prefix="${prefix}" />
+    <xacro:ur_depth_gazebo prefix="${prefix}" />
 
     <!-- Inertia parameters -->
     <xacro:property name="base_mass" value="4.0" />  <!-- This mass might be incorrect -->
@@ -435,6 +437,7 @@
         <mass value="0.052543" />
         <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
       </inertial>
+<!-- This is a dummy camera link used to properly avoid obstacles, does not need to be visualized
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -444,6 +447,7 @@
           <color rgba="0.79216 0.81961 0.93333 1" />
         </material>
       </visual>
+-->
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -458,6 +462,29 @@
       <child link="${prefix}d435" />
       <axis xyz="0 0 0" />
     </joint>
+
+<!-- ########## Joints/links specifically for Gazebo simulated 2D and depth camera ########## -->
+
+    <!-- Create a virtual joint between d435 and gazebo camera link -->
+    <joint name="${prefix}d435_gazebo_camera_joint" type="fixed">
+      <origin xyz="0 0 0.013" rpy="-1.57 -1.57 0.0"/>
+      <parent link="${prefix}d435"/>
+      <child link="${prefix}gazebo_camera"/>
+    </joint>
+
+    <link name="${prefix}gazebo_camera" />
+
+    <!-- Create a virtual joint between d435_mount_link and gazebo depth camera link -->
+    <joint name="${prefix}d435_mount_to_gazebo_depth_camera_joint" type="fixed">
+      <origin xyz="0 -0.013 0.09" rpy="1.5708 3.1416 0" />
+      <parent link="${prefix}d435_mount_link" />
+      <child link="${prefix}gazebo_depth_camera" />
+      <axis xyz="0 0 0" />
+    </joint>
+
+    <link name="${prefix}gazebo_depth_camera" />
+
+<!-- ########## Joints/links specifically for Gazebo simulated 2D and depth camera ########## -->
 
     <link name="${prefix}millibar_adapters_link">
       <inertial>

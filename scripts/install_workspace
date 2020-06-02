@@ -111,4 +111,9 @@ git clone -b forward https://github.com/atenpas/gpd.git
 ## return to base directory and build, source
 cd ..
 catkin build
+
+## redundant build due to order-related build errors
+## this should eventually be fixed by doing targeted builds before an entire one
+cd ..
+catkin build
 source ./devel/setup.bash

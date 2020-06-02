@@ -29,11 +29,11 @@
       <arg name="config" value="true"/>
     </include>
 
+    <!-- Launch Robotiq 2f Gripper TCP node for gripper control -->
+    <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperTcpNode" type="Robotiq2FGripperTcpNode.py" args="10.10.10.42" />
+
   </group>
 
   <include file="$(find ur5e_d435_millibar_combined_r2f85_moveit_config)/launch/demo.launch" if="$(arg sim)" />
-
-  <!-- Launch Robotiq 2f Gripper TCP node for gripper control -->
-  <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperTcpNode" type="Robotiq2FGripperTcpNode.py" args="10.10.10.42" />
 
 </launch>

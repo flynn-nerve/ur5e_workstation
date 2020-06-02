@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_combined_r2f85" >
+
+  <xacro:macro name="robotiq_arg2f_gazebo" params="prefix">
+
+    <gazebo reference="${prefix}left_outer_knuckle">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_outer_knuckle">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_outer_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_outer_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_inner_knuckle">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_inner_knuckle">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_inner_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_inner_finger">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}left_inner_finger_pad">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}right_inner_finger_pad">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
