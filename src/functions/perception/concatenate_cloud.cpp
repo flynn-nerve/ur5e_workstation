@@ -39,46 +39,43 @@ void Perception::concatenate_clouds()
   PassThrough<PointXYZRGB> pass_z;
   pass_z.setInputCloud (temp_cloud);
   pass_z.setFilterFieldName ("z");
-  pass_z.setFilterLimits (0.0, 0.3);
+  pass_z.setFilterLimits (-0.02, 0.3);
   pass_z.filter(*temp_cloud);
 
   //*****************************************************************
 
-  PointCloud<Normal>::Ptr temp_normals(new PointCloud<Normal>);
-  this->computeNormals(temp_cloud, temp_normals);
+  //PointCloud<Normal>::Ptr temp_normals(new PointCloud<Normal>);
+  //this->computeNormals(temp_cloud, temp_normals);
 
-  PointIndices::Ptr inliers_plane(new PointIndices);
-  *temp_cloud = this->sac_segmentation(temp_cloud, inliers_plane);
+  //PointIndices::Ptr inliers_plane(new PointIndices);
+  //*temp_cloud = this->sac_segmentation(temp_cloud, inliers_plane);
   this->combined_cloud = *temp_cloud;
 
-  this->extractNormals(temp_normals, inliers_plane);
+  //this->extractNormals(temp_normals, inliers_plane);
   
-  ModelCoefficients::Ptr coefficients_cylinder(new ModelCoefficients);
-  this->extractCylinder(temp_cloud, coefficients_cylinder, temp_normals);
+  //ModelCoefficients::Ptr coefficients_cylinder(new ModelCoefficients);
+  //this->extractCylinder(temp_cloud, coefficients_cylinder, temp_normals);
 
   //*****************************************************************
 
-  if (temp_cloud->points.empty())
-  {
-    ROS_ERROR_STREAM_NAMED("cylinder_segment", "Can't find the cylindrical component.");
-    return;
-  }
-  if (points_not_found)
-  {
-    /* Store the radius of the cylinder. */
-    this->radius = coefficients_cylinder->values[6];
-    /* Store direction vector of z-axis of cylinder. */
-    this->direction_vec[0] = coefficients_cylinder->values[3];
-    this->direction_vec[1] = coefficients_cylinder->values[4];
-    this->direction_vec[2] = coefficients_cylinder->values[5];
-    //
-    // Extracting Location and Height
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // Compute the center point of the cylinder using standard geometry
-    extractLocationHeight(temp_cloud);
-    addCylinder();
-    //points_not_found = false;
-  }
+  //if (temp_cloud->points.empty())
+  //{
+    //ROS_ERROR_STREAM_NAMED("cylinder_segment", "Can't find the cylindrical component.");
+    //return;
+  //}
+
+  /* Store the radius of the cylinder. */
+  //this->radius = coefficients_cylinder->values[6];
+  /* Store direction vector of z-axis of cylinder. */
+  //this->direction_vec[0] = coefficients_cylinder->values[3];
+  //this->direction_vec[1] = coefficients_cylinder->values[4];
+  //this->direction_vec[2] = coefficients_cylinder->values[5];
+  
+  // Extracting Location and Height
+  // Compute the center point of the cylinder using standard geometry
+  //extractLocationHeight(temp_cloud);
+  //addCylinder();
+
 }
 
 void Perception::extractCylinder(PointCloud<PointXYZRGB>::Ptr cloud, ModelCoefficients::Ptr coefficients_cylinder, PointCloud<Normal>::Ptr cloud_normals)
@@ -205,5 +202,5 @@ void Perception::addCylinder()
   collision_object.primitives.push_back(primitive);
   collision_object.primitive_poses.push_back(cylinder_pose);
   collision_object.operation = collision_object.ADD;
-  planning_scene_interface.applyCollisionObject(collision_object);
+  //planning_scene_interface.applyCollisionObject(collision_object);
 }

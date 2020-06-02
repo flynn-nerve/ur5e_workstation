@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+    xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+    xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+    xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+    xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+    xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+    xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_combined_r2f85" >
+
+  <xacro:macro name="ur_arm_gazebo" params="prefix">
+
+    <gazebo reference="${prefix}shoulder_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}upper_arm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}forearm_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_1_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_3_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wrist_2_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}ee_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,8 @@
+<launch>
+
+  <!-- <arg name="ip" unless="$(arg sim)"/> -->
+
+  <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperSimpleController" type="Robotiq2FGripperSimpleController.py" output="screen"/>
+  <node pkg="robotiq_2f_gripper_control" name="Robotiq2FGripperTcpNode" type="Robotiq2FGripperTcpNode.py" args="10.10.10.42" />
+
+</launch>

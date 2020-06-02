@@ -30,6 +30,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_eigen
   tf2_geometry_msgs
   robotiq_2f_gripper_control
+  gpd
 )
 
 catkin_package(
@@ -39,8 +40,8 @@ include_directories(include
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(manipulation_node
-	src/nodes/manipulation_node.cpp 
+add_executable(manipulation_sim_demo_node
+	src/nodes/manipulation_sim_demo_node.cpp 
 	src/functions/manipulation/move_to_.cpp
         src/functions/manipulation/generate_workspace.cpp
 	src/functions/manipulation/create_object.cpp
@@ -49,10 +50,9 @@ add_executable(manipulation_node
 	src/functions/manipulation/pose_goal.cpp
 	src/functions/perception/perception_class.cpp
         src/functions/perception/concatenate_cloud.cpp
-	src/functions/perception/take_snapshot_.cpp)
-add_executable(gripper_node
-	src/nodes/gripper_node.cpp)
-target_link_libraries(manipulation_node ${catkin_LIBRARIES})
-target_link_libraries(gripper_node ${catkin_LIBRARIES})
+	src/functions/perception/take_snapshot_.cpp
+        src/functions/perception/pcl_filters.cpp
+        src/functions/grasp_cluster/grasp_cluster_class.cpp)
+target_link_libraries(manipulation_sim_demo_node ${catkin_LIBRARIES})
 
 

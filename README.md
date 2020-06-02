@@ -1,180 +1,60 @@
-UR5e Workstation Package
+# NERVE Center @ UMASS Lowell: UR5e Workstation Package
 
-** Adapted from nerve_workstation package which was generated for the Verizon 5g Challenge **
-** Originally created to run nodes and launch files for working with the UR5e robot with some kinect cameras on one of the workstations and pedestals,
-updated contents include launch files for using realsense cameras instead of kinect cameras specifically because of wrist mounted realsense camera removing the need for workstation mounted cameras/sensors for improved reliability and function
+This package is currently a work in progress and a new, more general package will be created for the industrial arm robots at the NERVE center once all basic requirements are complete for the UR5e robot.
 
-** Updated contents: contains launch files for running UR5e, linked to actual universal_robot and ur_modern_driver packages for bringup files and drivers, with solidworks-generated robotiq 2f 85 gripper with millibar and robotiq tcpip adapter and custom 3d printed realsense D435i camera wrist mount for accurate movement control and planning
+This package serves to hold all of the launch, urdf, dae, etc. files necessary for the operation of the UR5e system at the NERVE Center with the 2 finger robotiq gripper and realsense d435 camera mouted to the end of the arm. Some old files remain as a point of reference as development moves forward. Files from the urdf folder were used to generate a moveit config package for the robot as well as an IKFast solver for operation of the actual robot.
 
-** to run UR5e with robotiq 2f 85 gripper and wrist-mounter realsense d435i camera (imu functionality not included):
+## Precursory note:
 
-roslaunch ur5e_workstation ur5e_workstation.launch ip:=<ip.address.of.robot>
+The setup scripts and instructions contained within this README/package all expect that the user is using catkin build to build their development space rather than catkin\_make. 
 
-** to run the robot as a simulation:
+Catkin\_tools (the package that gives you the catkin build utility among other tools) gives the user more context info when building and setting up a workspace and it the newer of the build options. It is suggested that the user switch to using the catkin\_tools package if they are not already.
 
-roslaunch ur5e_workstation ur5e_workstation.launch sim:=true
+## You can set up catkin_tools by heading over to their site or following these instructions:
 
-** to run the manipulation node which will capture 4 "snapshots" with the realsense camera, filter and concatenate the image:
+*https://catkin-tools.readthedocs.io/en/latest/installing.html*
 
-(in a separate terminal)
-rosrun ur5e_workstation manipulation_node
+*generally you would have this installed first, but in case you don't I am leaving directions* 
 
-**To control the actual robot, press the power button on the top of the front of the ur5e pendant. Once the pendant has booted up, click the red button in the bottom left and presst ON to activate the robot and START to enable movement, then close the initialize window by clicking Exit in th ebottom left. in the top right is an icon that looks like the pendant, click this icon and select Remote Control, the only option. In the very top right is a menu button represented by three horizontal lines, click this and then click About. A window will pop up showing the robot's IP address, use this as the argument for launching the above launch file to get the robot going**
-** If you need to manually move the robot around to reset a position or experiment with some joint configurations, simply navigate back to the top right of the pendant where you previously clicked on the image of the pendant to set Remote control. There is now an icon that represents remote controll in its place, click this and select Local control to regain control over the robot from the pendant ** 
+1. sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list'
+2. wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+3. sudo apt-get update
+4. sudo apt-get install python-catkin-tools
 
-** TODO: The urdf.xacro for the robotiq 2-finger gripper currently has all fixed joints, meaning the model will not reflect the fact that the gripper fingers can open and close. This will be adjusted later, but is currently not a necessity so it is being passed due to time constraints. 
-** If you want to manually control a robotiq 2-finger gripper, run these nodes:
+###### Get your workspace initialized and ready:
 
-rosrun robotiq_2f_gripper_control Robotiq2FGripperTcpNode.py <your_gripper's_IP_address>
-rosrun robotiq_2f_gripper_control Robotiq2FGripperSimpleController.py
+1. cd ~/<your_ws>
+2. catkin init
+3. catkin build
 
-** This will require you to clone the robotiq package from github:
-instructions below
+That's it, you're ready to go.
+Their main website has more guides for those interested in exploring additional utilities
 
-** To get your gripper's IP address, go to the robotiq site and download the interface software for windows and plug it into your computer via USB (I am too tired to find this link for you right now, but I believe in you friend)
-** If you belong to NERVE, the ip address is currently locked in at 10.10.10.42
+## Setup of package and necessary components
 
-** A link to the kinetic guide for using a robotiq 2-finger gripper (USB and TCP):
-http://wiki.ros.org/robotiq/Tutorials/Control%20of%20a%202-Finger%20Gripper%20using%20the%20Modbus%20RTU%20protocol%20%28ros%20kinetic%20and%20newer%20releases%29
+A setup script for installing all required packages is located within ur5e_workstation/scripts. The script takes in one argument: the name of your workspace. 
 
-**TODO -put all custom packages on NERVE github and not on my github eventually once things are all cool**
-**Necessary packages:**
+*example:*
 
-**Universal Robot**
-https://github.com/ros-industrial/universal_robot.git
-git clone -b kinetic-devel https://github.com/ros-industrial/universal_robot.git
+I want to install this package and its other required packages in my workspace called catkin_ws:
+1. cd ~/catkin_ws/src
+2. git clone -b devel https://github.com/flynn-nerve/ur5e_workstation.git
+3. cd ..
+4. catkin build
+5. source ./devel/setup.bash
+6. cd src/ur5e_workstation/scripts
+7. ./install\_workspace catkin\_ws
 
-**UR Modern Driver**
-**IT IS IMPORTANT YOU USE THE ONE FROM dniewinski AND NOT ros-industrial BECAUSE IT DOES NOT HAVE THE *e* VERSIONS**
-https://github.com/dniewinski/ur_modern_driver
-git clone -b kinetic-devel https://github.com/dniewinski/ur_modern_driver.git
+_You will need to enter your password for the sudo apt-get... instructions in the beginning, so don't walk away until you have completed that step (probably about 15 seconds after running the script). Installation will take a while after entering your password, so don't forget to do that (~20 minutes if you have none of the libraries installed or haven't set up a realsense camera already)_
 
-**UR5e Joint Limited Robotiq 2f 85 Moveit Config**
-**Custom Moveit! package for ur5e, will allow you to simulate the robot but is not heavily used since most files required for control of the actual robot are contained within the universal_robot and ur_modern_driver packages, gripper and adapters are in the robotiq_2f_85_full custom package and ur5e_workstation wraps the necessary launch files and nodes into a launch file (ur5e_workstation.launch) for you
-https://github.com/flynn-nerve/ur5e_joint_limited_robotiq_2f_85_moveit_config
-git clone -b master https://github.com/flynn-nerve/ur5e_joint_limited_robotiq_2f_85_moveit_config
+## Use of package
 
-**Robotiq**
-**This is the solidworks-generated urdf package that you will need to run our current setup, this will not allow you to control the gripper, only represent it in rviz when running Moveit! stuff so the robot does not slam the gripper into objects and knows where to put the TCP**
-https://github.com/flynn-nerve/robotiq_2f_85_full
-git clone -b master https://github.com/flynn-nerve/robotiq_2f_85_full
+Currently, the package is used to run a specific setup; the UR5e industrial arm with a mounting structure that includes a 3d-printed realsense camera mount, gripper quick-change adapter, and a robotiq 2f\_85 gripper. The moveit config package can be used in simulation, but you will want to make your own custom moveit config package if you have a robot with a different hardware setup.
 
-**This is for controlling the gripper, not modeling it**
-https://github.com/ros-industrial/robotiq
-git clone -b kinetic-devel https://github.com/ros-industrial/robotiq.git
+So long as you have installed the other packages (manually or by the script) you can launch a simulation of the robot with the following command:
+ur5e_workstation ur5e\_workstation\_v3.launch sim:=true 
 
-
-*********************************************************************************************************************************************
-**INSTRUCTIONS FOR INSTALLING REALSENSE CAMERAS**
-**** Realsense package installation instructions ****
-
----- Setup ----
-Unplug any realsense cameras before completing installation
-
-cd <your_ws>/src
-
----- Download librealsense github repo ----
-git clone -b  master https://github.com/IntelRealSense/librealsense.git
-
----- Install core packages required to build librealsense binaries ----
-sudo apt-get install git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
-
-sudo apt-get install libglfw3-dev
-
----- Add server to list of repositories ----
-sudo apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
-
-sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main" -u
-
----- Install libraries (and optional libraries) ----
-sudo apt-get install librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg
-
----- Update and upgrade ----
-sudo apt-get update && sudo apt-get upgrade
-
----- Install dependencies and then build workspace ----
-rosdep install --from-paths src --ignore-src --rosdistro kinetic
-
-**** Realsense cameras will not work if you do not run these following scripts (from the <your_ws>/src/librealsense directory) and give the ports permissions (udev rule settings) ****
-cd librealsense
-
-./scripts/setup_udev_rules.sh
-
-./scripts/patch-realsense-ubuntu-lts.sh
-
----- Download realsense package (not realsense-ros package) ----
-
-cd <your_ws>/src
-
-git clone -b development https://github.com/doronhi/realsense.git
-
-cd <your_ws>/src/realsense
-
-git clone -b kinetic-devel https://github.com/pal-robotics/ddynamic_reconfigure.git
-
-cd ../..
-
----- Install dependencies and then build workspace ----
-rosdep install --from-paths src --ignore-src --rosdistro kinetic
-
-catkin build
-
----- Test packages if build completed ----
-Plug in realsense camera
-
-roslaunch realsense2_camera rs_camera.launch
-
-rosrun rviz rviz
-
-in rviz; add topic for image view from camera to check that camera is working
-
-*********************************************************************************************************************************************
-**ONLY FOLLOW THESE INSTRUCTIONS IF SOMETHING IS BROKEN**
-
----- If cameras will not work, check the libraries (librealsense-<stuff>, above) and if any say that they cannot be installed, follow these instructions:
-
-sudo apt-get remove librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg
-
-dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge
-
-sudo rm -f /etc/apt/sources.list.d/realsense-public.list
-
-sudo apt-get update
-
-sudo apt-get install librealsense2-dkms
-
-sudo apt-get install librealsense2-utils
-
-sudo apt-get install librealsense2-dev
-
-sudo apt-get install librealsense2-dbg
-
-**ONLY DO THESE INSTRUCTIONS IF THE PREVIOUS ONES DO NOT WORK AND IT IS VERY BROKEN**
-**** If this still does not work, you have to delete more and may have messed something up but it is fixable ****
-**** Fair warning, this will make ros basically not work, it is not permanent, this is what I did when I broke everything ****
-
-manually delete the librealsense and realsense packages
-
-sudo apt-get remove librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg
-
-dpkg -l | grep "realsense" | cut -d " " -f 3 | xargs sudo dpkg --purge
-
-sudo rm -f /etc/apt/sources.list.d/realsense-public.list
-
-sudo apt-get remove --install-recommends linux-generic-lts-xenial xserver-xorg-core-lts-xenial xserver-xorg-lts-xenial xserver-xorg-video-all-lts-xenial xserver-xorg-input-all-lts-xenial libwayland-egl1-mesa-lts-xenial
-
-sudo apt-get remove git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
-
-sudo apt-get update && sudo apt-get upgrade
-
-cd <your_ws>
-
-rosdep install --from-paths src --ignore-src --rosdistro kinetic
-
-catkin build
-
-source ./devel/setup.bash
-
-**** This should fix everything, you may find that a couple of packages you had installed from binaries are not working, just reinstall them and you should be good to go. at this point, go back to the start and redo the process. If everything is done correctly, you won't run into this issue ****
+Alternatively, you can launch the real robot by providing the ip address as an argument instead if you know it. Once again, this is strongly advised against since you will likely need to make a custom moveit! config package for your specific hardware configuration to ensure that you do not harm the robot, its surroundings, or any users nearby.
+ur5e\_workstation ur5e\_workstation_v3.launch ip:=<your.robots.ip.address>
 
 
