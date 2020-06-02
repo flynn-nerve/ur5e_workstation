@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e_d435_millibar_combined_r2f85" >
+
+  <xacro:macro name="robotiq_arg2f_transmission" params="prefix">
+
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="${prefix}left_inner_knuckle_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}left_inner_knuckle_joint</joint>
+        <mimicJoint>${prefix}finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="${prefix}right_inner_knuckle_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}right_inner_knuckle_joint</joint>
+        <mimicJoint>${prefix}finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="${prefix}left_inner_finger_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}left_inner_finger_joint</joint>
+        <mimicJoint>${prefix}finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="${prefix}right_inner_finger_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}right_inner_finger_joint</joint>
+        <mimicJoint>${prefix}finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="${prefix}right_outer_knuckle_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}right_outer_knuckle_joint</joint>
+        <mimicJoint>${prefix}finger_joint</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <robotNamespace>/ur5e</robotNamespace>
+      </plugin>
+    </gazebo>
+
+    <transmission name="${prefix}finger_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}finger_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}finger_joint_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </xacro:macro>
+</robot>
