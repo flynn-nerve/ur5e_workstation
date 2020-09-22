@@ -103,6 +103,7 @@
     <xacro:property name="forearm_radius" value="0.040" />    <!-- manually measured -->
     <xacro:property name="wrist_radius" value="0.045" />      <!-- manually measured -->
 
+    <!-- ADD IN WORKSTATION STRUCTURE -->
 
     <link name="${prefix}base_link" >
       <visual>

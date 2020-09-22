@@ -1,0 +1,64 @@
+#!/bin/bash
+
+WORKSPACE=$1
+
+## move into desired workspace
+echo package clone path: $WORKSPACE/src
+cd ~/$WORKSPACE/src
+
+## install realsense cameras
+##--------------------------------------------------------------##
+
+## clone librealsense package
+git clone -b master https://github.com/IntelRealSense/librealsense.git
+
+## install necessary libraries
+sudo apt-get install git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev -y
+
+## add keyserver to list of repositories
+sudo apt-key adv --keyserver keys.gnupg.net --recv-key C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
+sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main" -u
+
+## install additional libraries
+sudo apt-get install librealsense2-dkms librealsense2-utils librealsense2-dev librealsense2-dbg -y
+
+## update and upgrade
+sudo apt-get update && sudo apt-get upgrade -y
+
+## check for and install missing dependencies and build workspace
+rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
+cd ..
+catkin build
+source /devel/setup.bash
+
+## run realsense camera scripts to add cameras to udev rules and patch software
+## your cameras WILL NOT WORK without allowing this step to happen
+cd src/librealsense
+./scripts/setup_udev_rules.sh
+./scripts/patch-realsense-ubuntu-lts.sh
+cd ..
+
+## clone realsense package (not realsense-ros package)
+## clone ddynamic_reconfigure package into realsense package
+git clone -b development https://github.com/doronhi/realsense.git
+cd realsense
+git clone -b kinetic-devel https://github.com/pal-robotics/ddynamic_reconfigure.git
+cd ..
+
+## install rgbd_launch/rs_camera package for realsense cameras
+sudo apt-get install ros-kinetic-rgbd-launch -y
+
+## return to base directory
+roscd
+cd ..
+
+## check for and install missing dependencies again, build
+rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
+catkin build
+source /devel/setup.bash
+
+## redundant build due to order-related build errors
+## this should eventually be fixed by doing targeted builds before an entire one
+cd ..
+catkin build
+source /devel/setup.bash
